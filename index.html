@@ -239,6 +239,30 @@
       .sticker { width: 86px; height: 86px; right: 0; bottom: 0; font-size: .8rem; }
     }
 
+    /* Random character standing on the castle pathway */
+    .random-hero-monster {
+      position: absolute;
+      z-index: 2;
+      width: clamp(190px, 22vw, 390px);
+      max-height: 76%;
+      height: auto;
+      object-fit: contain;
+      object-position: center bottom;
+      right: 29%;
+      bottom: 12px;
+      filter: drop-shadow(0 9px 10px rgba(0,0,0,.32));
+      pointer-events: none;
+    }
+    @media (max-width: 800px) {
+      .random-hero-monster {
+        width: clamp(125px, 30vw, 220px);
+        right: 4%;
+        bottom: 6px;
+        max-height: 44%;
+      }
+      .hero-copy { position: relative; z-index: 3; }
+    }
+
     /* Web font test: Fredoka headings + Nunito body copy */
     body { font-family: "Nunito", "Trebuchet MS", Arial, sans-serif; }
     h1, h2, h3, .eyebrow, .button, .nav a, .logo-text {
@@ -291,7 +315,7 @@
             <a class="button secondary" href="#characters">Meet the Crew ↓</a>
           </div>
         </div>
-
+        <img class="random-hero-monster" id="randomHeroMonster" src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Zombie%2001.png" alt="A friendly My Colorful Monsters character standing on the castle pathway" aria-hidden="true">
       </div>
     </section>
 
@@ -441,6 +465,27 @@
       </div>
     </div>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function () {
+      const characters = [
+        { file: 'Zombie%2001.png', name: 'zombie' },
+        { file: 'Vampire%2001.png', name: 'vampire' },
+        { file: 'Werewolf%2001.png', name: 'werewolf' },
+        { file: 'Witch%2001.png', name: 'witch' },
+        { file: 'Skeleton%2001.png', name: 'skeleton' },
+        { file: 'Scarecrow%2001.png', name: 'scarecrow' },
+        { file: 'Furry%20Monster%2001.png', name: 'furry monster' },
+        { file: 'Aquatic%20Monster%2001.png', name: 'aquatic monster' }
+      ];
+      const chosen = characters[Math.floor(Math.random() * characters.length)];
+      const image = document.getElementById('randomHeroMonster');
+      if (image && chosen) {
+        image.src = 'https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/' + chosen.file;
+        image.alt = 'A friendly ' + chosen.name + ' character standing on the castle pathway';
+        image.setAttribute('aria-hidden', 'true');
+      }
+    })();
+  </script>
 </body>
 </html>
