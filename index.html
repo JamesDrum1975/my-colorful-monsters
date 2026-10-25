@@ -166,6 +166,21 @@
     @media (prefers-reduced-motion: reduce) { .feature:hover,.brand:hover img { transform:none; } }
 
 
+
+    /* Original character gallery */
+    .monster-gallery { padding: 76px 0 86px; background: #fffaf0; }
+    .monster-gallery-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px; }
+    .monster-card { min-width:0; text-align:center; padding:16px 14px 18px; border:3px solid var(--ink); border-radius:26px 26px 26px 12px; background:#fff; box-shadow:5px 6px 0 var(--ink); transition:transform .2s ease; }
+    .monster-card:nth-child(4n+2) { background:#f4e8ff; border-radius:26px 12px 26px 26px; }
+    .monster-card:nth-child(4n+3) { background:#e7f8ff; border-radius:12px 26px 26px 26px; }
+    .monster-card:nth-child(4n+4) { background:#fff0c8; }
+    .monster-card:hover { transform:translateY(-5px) rotate(-1deg); }
+    .monster-card img { width:100%; height:220px; object-fit:contain; margin:0 auto 10px; }
+    .monster-card h3 { margin:0; font-size:1.12rem; }
+    .monster-gallery .section-head { margin-bottom:32px; }
+    @media(max-width:800px) { .monster-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; } .monster-card img { height:175px; } }
+    @media(max-width:420px) { .monster-card { padding:10px 8px 13px; } .monster-card img { height:145px; } }
+
     /* Castle-world redesign: full-bleed storybook background */
     .hero {
       min-height: min(820px, calc(100svh - 70px));
@@ -244,7 +259,7 @@
           </div>
         </div>
         <div class="hero-art">
-          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Whole%20Group.png" alt="All seven original My Colorful Monsters characters together">
+          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/monster-crew.webp" alt="All seven original My Colorful Monsters characters together">
           <div class="sticker">COLOR<br>YOUR<br>OWN<br>ADVENTURE!</div>
         </div>
       </div>
@@ -280,7 +295,7 @@
     <section class="characters" id="characters">
       <div class="wrap character-grid">
         <div class="character-art">
-          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Whole%20Group.png" alt="The original My Colorful Monsters character crew of seven friendly monsters">
+          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/monster-crew.webp" alt="The original My Colorful Monsters character crew of seven friendly monsters">
         </div>
         <div class="character-copy">
           <span class="eyebrow">The original crew</span>
@@ -292,6 +307,51 @@
             <span class="pill">🖍️ Creative play</span>
           </div>
           <a class="button secondary" href="#book">Color with the crew</a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="monster-gallery" aria-labelledby="monster-gallery-title">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">Say hello!</span>
+          <h2 id="monster-gallery-title">Meet the Monster Crew</h2>
+          <p>Eight kinds of friendly characters, each ready to join your next coloring adventure.</p>
+        </div>
+        <div class="monster-gallery-grid">
+          <article class="monster-card">
+            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Aquatic%20Monster%2001.png" alt="Original aquatic monster character" loading="lazy">
+            <h3>Aquatic Monsters</h3>
+          </article>
+          <article class="monster-card">
+            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Furry%20Monster%2001.png" alt="Original furry monster character" loading="lazy">
+            <h3>Furry Monsters</h3>
+          </article>
+          <article class="monster-card">
+            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Scarecrow%2001.png" alt="Original scarecrow character" loading="lazy">
+            <h3>Scarecrows</h3>
+          </article>
+          <article class="monster-card">
+            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Skeleton%2001.png" alt="Original skeleton character" loading="lazy">
+            <h3>Skeletons</h3>
+          </article>
+          <article class="monster-card">
+            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Vampire%2001.png" alt="Original vampire character" loading="lazy">
+            <h3>Vampires</h3>
+          </article>
+          <article class="monster-card">
+            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Werewolf%2001.png" alt="Original werewolf character" loading="lazy">
+            <h3>Werewolves</h3>
+          </article>
+          <article class="monster-card">
+            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Witch%2001.png" alt="Original witch character" loading="lazy">
+            <h3>Witches</h3>
+          </article>
+          <article class="monster-card">
+            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Zombie%2001.png" alt="Original zombie character" loading="lazy">
+            <h3>Zombies</h3>
+          </article>
         </div>
       </div>
     </section>
