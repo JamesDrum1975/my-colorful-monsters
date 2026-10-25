@@ -201,7 +201,10 @@
       background: radial-gradient(ellipse at 18% 15%, rgba(112,65,196,.22), transparent 42%);
       pointer-events: none;
     }
-    .hero-grid { grid-template-columns: .82fr 1.18fr; gap: 22px; align-items: end; }
+    .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 0; align-items: center; }
+    .hero-copy { max-width: 760px; padding: 32px 0; }
+    .hero-copy p { max-width: 650px; }
+    .hero-art, .sticker { display: none !important; }
     .hero-copy { padding: 28px 0 18px; max-width: 510px; }
     .hero-copy .eyebrow { color: #29154d; background: #ffe36c; border-color: #fff; box-shadow: 3px 4px 0 rgba(0,0,0,.25); }
     h1 { font-size: clamp(3.2rem, 6vw, 5.8rem); color: #fff; text-shadow: 0 4px 16px rgba(0,0,0,.4); }
@@ -223,10 +226,8 @@
     .about { background: #e7f7ff; }
     @media (max-width: 800px) {
       .hero { min-height: auto; padding: 44px 0 70px; background-position: 57% center; }
-      .hero-grid { grid-template-columns: 1fr; gap: 10px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 0; }
       .hero-copy { max-width: 620px; padding: 8px 0 0; }
-      .hero-art { max-width: 650px; width: 100%; margin: 0 auto; }
-      .hero-art img { width: 108%; margin-left: -4%; }
       .sticker { width: 86px; height: 86px; right: 0; bottom: 0; font-size: .8rem; }
     }
 
@@ -258,10 +259,7 @@
             <a class="button secondary" href="#characters">Meet the Crew ↓</a>
           </div>
         </div>
-        <div class="hero-art">
-          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/monster-crew.webp" alt="All seven original My Colorful Monsters characters together">
-          <div class="sticker">COLOR<br>YOUR<br>OWN<br>ADVENTURE!</div>
-        </div>
+
       </div>
     </section>
 
