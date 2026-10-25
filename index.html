@@ -165,6 +165,56 @@
     }
     @media (prefers-reduced-motion: reduce) { .feature:hover,.brand:hover img { transform:none; } }
 
+
+    /* Castle-world redesign: full-bleed storybook background */
+    .hero {
+      min-height: min(820px, calc(100svh - 70px));
+      display: flex;
+      align-items: center;
+      padding: 72px 0 86px;
+      color: #fff;
+      background:
+        linear-gradient(90deg, rgba(7,14,53,.90) 0%, rgba(7,14,53,.70) 38%, rgba(7,14,53,.18) 72%, rgba(7,14,53,.10) 100%),
+        linear-gradient(0deg, rgba(7,14,53,.48) 0%, transparent 40%),
+        url("https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/castle-background.png") center center / cover no-repeat;
+      position: relative;
+      isolation: isolate;
+    }
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0; z-index: -1;
+      background: radial-gradient(ellipse at 18% 15%, rgba(112,65,196,.22), transparent 42%);
+      pointer-events: none;
+    }
+    .hero-grid { grid-template-columns: .82fr 1.18fr; gap: 22px; align-items: end; }
+    .hero-copy { padding: 28px 0 18px; max-width: 510px; }
+    .hero-copy .eyebrow { color: #29154d; background: #ffe36c; border-color: #fff; box-shadow: 3px 4px 0 rgba(0,0,0,.25); }
+    h1 { font-size: clamp(3.2rem, 6vw, 5.8rem); color: #fff; text-shadow: 0 4px 16px rgba(0,0,0,.4); }
+    h1 .color { color: #ffe36c; text-shadow: 3px 4px 0 #5b2391, 0 5px 14px rgba(0,0,0,.35); }
+    .hero-copy p { color: #fff; font-size: clamp(1.1rem, 1.5vw, 1.3rem); text-shadow: 0 2px 9px rgba(0,0,0,.65); }
+    .hero-art { align-self: end; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; transform: none; }
+    .hero-art img { width: 112%; max-width: none; margin-left: -6%; border-radius: 0; filter: drop-shadow(0 10px 14px rgba(0,0,0,.25)); }
+    .sticker { right: -8px; bottom: 4px; background: #ff7dbb; color: #2c1554; border-color: #fff; box-shadow: 4px 5px 0 #2c1554; }
+    .hero .button.primary { background: #ffe36c; }
+    .hero .button.secondary { color: #2c1554; background: #fff; }
+    #world { background: #fff8e9; }
+    #world .feature { background: #fff; }
+    #world .feature:nth-child(1) { background: #e6f8ff; }
+    #world .feature:nth-child(2) { background: #f5e8ff; }
+    #world .feature:nth-child(3) { background: #fff0c8; }
+    .characters { background: linear-gradient(180deg,#fff7e8,#f0e5ff); }
+    .book { background: linear-gradient(135deg,rgba(25,12,65,.97),rgba(78,25,122,.96)); }
+    .freebie { background: linear-gradient(135deg,#ffe6a6,#e5f8ff); }
+    .about { background: #e7f7ff; }
+    @media (max-width: 800px) {
+      .hero { min-height: auto; padding: 44px 0 70px; background-position: 57% center; }
+      .hero-grid { grid-template-columns: 1fr; gap: 10px; }
+      .hero-copy { max-width: 620px; padding: 8px 0 0; }
+      .hero-art { max-width: 650px; width: 100%; margin: 0 auto; }
+      .hero-art img { width: 108%; margin-left: -4%; }
+      .sticker { width: 86px; height: 86px; right: 0; bottom: 0; font-size: .8rem; }
+    }
+
   </style>
 </head>
 <body>
