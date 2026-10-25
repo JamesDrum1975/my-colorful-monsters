@@ -175,7 +175,11 @@
     .monster-card:nth-child(4n+3) { background:#e7f8ff; border-radius:12px 26px 26px 26px; }
     .monster-card:nth-child(4n+4) { background:#fff0c8; }
     .monster-card:hover { transform:translateY(-5px) rotate(-1deg); }
-    .monster-card img { width:100%; height:220px; object-fit:contain; margin:0 auto 10px; }
+    .monster-card img { width:100%; height:220px; object-fit:contain; object-position:center bottom; margin:0 auto 10px; }
+    /* Keep each character's visible artwork at a consistent visual scale */
+    .monster-card { display:flex; flex-direction:column; align-items:center; }
+    .monster-card img { width:100%; height:220px; object-fit:contain; object-position:center center; padding:8px; }
+    .monster-card h3 { margin-top:auto; }
     .monster-card h3 { margin:0; font-size:1.12rem; }
     .monster-gallery .section-head { margin-bottom:32px; }
     @media(max-width:800px) { .monster-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; } .monster-card img { height:175px; } }
