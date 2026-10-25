@@ -250,6 +250,8 @@
       object-position: center bottom;
       right: 32%;
       bottom: 105px;
+      /* Compensate for transparent canvas space around the character artwork */
+      transform: translate(8vw, 32vh);
       filter: drop-shadow(0 9px 10px rgba(0,0,0,.32));
       pointer-events: none;
     }
@@ -259,6 +261,7 @@
         right: 4%;
         bottom: 24px;
         max-height: 44%;
+        transform: translate(4vw, 15vh);
       }
       .hero-copy { position: relative; z-index: 3; }
     }
