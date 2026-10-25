@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Meet the friendly monsters of My Colorful Monsters — a playful world of coloring, imagination, and Halloween fun.">
-  <meta name="theme-color" content="#251044">
+  <meta name="theme-color" content="#7a35bd">
   <title>My Colorful Monsters | A Little Monster Fun!</title>
   <style>
     :root {
@@ -104,6 +104,67 @@
       .freebie-panel .button { justify-self: center; }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+
+    /* Playful monster-world refresh */
+    :root {
+      --ink: #2c1554; --purple: #7838c8; --orange: #ff8a24;
+      --lime: #c7f464; --pink: #ff69b4; --cream: #fffaf0;
+      --sky: #e9faff; --white: #fff; --muted: #655574;
+      --shadow: 0 12px 0 rgba(44,21,84,.10); --radius: 30px;
+    }
+    body { background: #fffaf0; }
+    .topbar { background: #7838c8; border-bottom: 4px solid #c7f464; font-size: .9rem; font-weight: 900; }
+    header { background: rgba(255,250,240,.96); border-bottom: 3px dashed rgba(120,56,200,.22); }
+    .brand img { transition: transform .25s ease; }
+    .brand:hover img { transform: rotate(-3deg) scale(1.03); }
+    nav a:not(.nav-cta) { padding: 9px 4px; border-bottom: 3px solid transparent; }
+    nav a:not(.nav-cta):hover { border-color: var(--pink); color: var(--purple); }
+    .nav-cta, .button { border: 3px solid var(--ink); font-size: 1rem; }
+    .nav-cta, .button.primary { background: var(--lime); box-shadow: 0 5px 0 var(--ink); }
+    .button.secondary { background: white; border: 3px solid var(--ink); box-shadow: 0 5px 0 var(--ink); }
+    .hero { position: relative; padding: 68px 0 82px; background: radial-gradient(circle at 7% 25%,#ffcf5a 0 44px,transparent 46px), radial-gradient(circle at 92% 17%,#ffb5dc 0 52px,transparent 54px), radial-gradient(circle at 84% 90%,#b8f2ee 0 65px,transparent 67px), linear-gradient(140deg,#f3e5ff 0%,#fff1c9 52%,#e7faff 100%); }
+    .hero:after { content:"✦   •   ✧      ✦       •     ✧"; position:absolute; left:4%; bottom:18px; color:#7838c8; font-size:1.35rem; letter-spacing:1rem; pointer-events:none; }
+    .hero-grid { position:relative; z-index:1; gap:30px; }
+    h1 { font-size: clamp(3rem,6.2vw,5.6rem); }
+    h1 .color { color:#7838c8; text-shadow: 3px 4px 0 #fff, 5px 6px 0 #ffb5dc; }
+    .hero-copy p { font-size:1.2rem; }
+    .hero-art { padding:12px; border:4px solid var(--ink); border-radius:38px; background:rgba(255,255,255,.58); box-shadow:8px 9px 0 var(--ink); transform:rotate(1deg); }
+    .hero-art img { border-radius:25px; filter:drop-shadow(0 8px 0 rgba(44,21,84,.08)); }
+    .sticker { background:#ffcf5a; border-radius:28px 42px 28px 42px; transform:rotate(8deg); }
+    section { padding:88px 0; }
+    .section-head h2, .character-copy h2, .book h2, .freebie h2, .about-inner h2 { text-wrap:balance; }
+    .section-head .eyebrow { background:#c7f464; }
+    .feature { border:3px solid var(--ink); border-radius:30px 30px 30px 12px; box-shadow:6px 7px 0 var(--ink); transition:transform .2s ease; }
+    .feature:nth-child(2) { border-radius:30px 12px 30px 30px; }
+    .feature:nth-child(3) { border-radius:12px 30px 30px 30px; }
+    .feature:hover { transform:translateY(-5px) rotate(-.5deg); }
+    .feature .emoji { display:inline-grid; place-items:center; width:62px; height:62px; border:3px solid var(--ink); border-radius:22px; background:white; box-shadow:3px 4px 0 var(--ink); }
+    .characters { background:linear-gradient(180deg,#fff 0%,#f9f0ff 100%); position:relative; }
+    .character-art { background:#fff0c8; border:4px solid var(--ink); border-radius:38px 22px 38px 22px; box-shadow:8px 9px 0 var(--ink); }
+    .character-art img { border-radius:24px; }
+    .character-copy .eyebrow { background:#ffb5dc; }
+    .pill { border:2px solid var(--ink); box-shadow:2px 3px 0 var(--ink); background:#fff; }
+    .book { background:radial-gradient(circle at 90% 10%,rgba(255,207,90,.18) 0 100px,transparent 102px),linear-gradient(140deg,#35145e,#7838c8); border-block:7px solid #c7f464; }
+    .book-image { border:4px solid var(--ink); border-radius:20px 36px 20px 36px; transform:rotate(-3deg); }
+    .book .eyebrow { color:var(--ink); background:#ffb5dc; }
+    .freebie { background:linear-gradient(135deg,#fff0c8,#e9faff); }
+    .freebie-panel { border:3px dashed #7838c8; border-radius:34px; box-shadow:7px 8px 0 rgba(44,21,84,.12); }
+    .freebie-panel img { border:3px solid var(--ink); box-shadow:4px 5px 0 var(--ink); }
+    .about { background:#e9faff; position:relative; }
+    .about-inner { background:rgba(255,255,255,.72); padding:38px 30px; border:3px dashed #7838c8; border-radius:36px; }
+    .about-inner .eyebrow { background:#c7f464; }
+    .footer { border-top:7px solid #c7f464; }
+    .footer-links a:hover { color:#ffcf5a; }
+    a:focus-visible { outline:4px solid #ff69b4; outline-offset:4px; }
+    @media (max-width:800px) {
+      .hero { padding:42px 0 64px; }
+      .hero-art { margin:8px 8px 20px; }
+      .sticker { width:92px;height:92px;font-size:.85rem; right:-8px; bottom:-12px; }
+      section { padding:62px 0; }
+      .about-inner { padding:28px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .feature:hover,.brand:hover img { transform:none; } }
+
   </style>
 </head>
 <body>
@@ -133,7 +194,7 @@
           </div>
         </div>
         <div class="hero-art">
-          <img src="assets/banner.webp" alt="The established My Colorful Monsters character crew and logo">
+          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Whole%20Group.png" alt="All seven original My Colorful Monsters characters together">
           <div class="sticker">COLOR<br>YOUR<br>OWN<br>ADVENTURE!</div>
         </div>
       </div>
@@ -169,7 +230,7 @@
     <section class="characters" id="characters">
       <div class="wrap character-grid">
         <div class="character-art">
-          <img src="assets/monster-crew.webp" alt="The original My Colorful Monsters character crew">
+          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Whole%20Group.png" alt="The original My Colorful Monsters character crew of seven friendly monsters">
         </div>
         <div class="character-copy">
           <span class="eyebrow">The original crew</span>
