@@ -444,6 +444,7 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     (function () {
       const base = 'https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/';
+      const imageVersion = '20261025';
       const scenes = [
         'castle-background.png',
         'castle-background-aquatic-monster.png',
@@ -461,7 +462,7 @@
         hero.style.backgroundImage =
           'linear-gradient(90deg, rgba(7,14,53,.58) 0%, rgba(7,14,53,.38) 32%, rgba(7,14,53,.06) 68%, rgba(7,14,53,0) 100%), ' +
           'linear-gradient(0deg, rgba(7,14,53,.20) 0%, transparent 40%), ' +
-          'url("' + base + scene + '")';
+          'url("' + base + scene + '?v=' + imageVersion + '")';
       }
     })();
   </script>
