@@ -180,6 +180,14 @@
     .book { background:radial-gradient(circle at 90% 10%,rgba(255,207,90,.18) 0 100px,transparent 102px),linear-gradient(140deg,#35145e,#7838c8); border-block:7px solid #c7f464; }
     .book-image { border:4px solid var(--ink); border-radius:20px 36px 20px 36px; transform:rotate(-3deg); }
     .book .eyebrow { color:var(--ink); background:#ffb5dc; }
+    .book-copy { max-width: 590px; }
+    .book-highlights { list-style:none; padding:0; margin:22px 0; display:grid; gap:10px; }
+    .book-highlights li { display:flex; align-items:flex-start; gap:11px; color:#fff; font-weight:800; }
+    .book-highlights li span { flex:0 0 25px; width:25px; height:25px; display:inline-grid; place-items:center; border-radius:50%; background:#c7f464; color:#2c1554; font-weight:1000; line-height:1; }
+    .book-actions { margin-top:24px; }
+    .book-actions .button.secondary { background:#fff; color:#2c1554; }
+    @media (max-width:800px) { .book-copy { max-width:none; } .book-actions { justify-content:center; } }
+
     .freebie { background:linear-gradient(135deg,#fff0c8,#e9faff); }
     .freebie-panel { border:3px dashed #7838c8; border-radius:34px; box-shadow:7px 8px 0 rgba(44,21,84,.12); }
     .freebie-panel img { border:3px solid var(--ink); box-shadow:4px 5px 0 var(--ink); }
@@ -445,17 +453,25 @@
     <section class="book" id="book">
       <div class="wrap book-grid">
         <div class="book-image">
-          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/coloring-book-cover.png" alt="My Colorful Monsters coloring book cover featuring the friendly monster crew on a moonlit Halloween parade">
+          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/coloring-book-cover.png" alt="Cover of the My Colorful Monsters Halloween coloring book, featuring the original friendly monster crew">
         </div>
-        <div>
-          <span class="eyebrow">The first adventure</span>
+        <div class="book-copy">
+          <span class="eyebrow">The first adventure · Available now</span>
           <h2>Bring the monsters to your coloring table</h2>
-          <p>Meet the My Colorful Monsters coloring book: a Halloween-themed collection of friendly monster scenes designed to invite kids to slow down, get creative, and make each page their own.</p>
+          <p>Meet the My Colorful Monsters coloring book: a Halloween-themed collection of friendly monster scenes that invites young artists to get creative and make each page their own.</p>
+          <ul class="book-highlights" aria-label="Coloring book highlights">
+            <li><span aria-hidden="true">✓</span> 40 original coloring pages</li>
+            <li><span aria-hidden="true">✓</span> Friendly Halloween monster characters</li>
+            <li><span aria-hidden="true">✓</span> Square 8.5 × 8.5-inch paperback</li>
+          </ul>
           <div class="details">
-            <span>Paperback</span><span>8.5 × 8.5 inches</span><span>Original monster characters</span>
+            <span>Paperback</span><span>Original monster crew</span><span>Creative Halloween fun</span>
           </div>
-          <a class="button primary" href="https://a.co/d/0hl0KAPm" target="_blank" rel="noopener noreferrer" aria-label="Buy the My Colorful Monsters coloring book on Amazon">Buy on Amazon ↗</a>
-          <p class="note" style="margin-top:14px">Available now on Amazon. Select the button above to view the book and purchase options.</p>
+          <div class="actions book-actions">
+            <a class="button primary" href="https://a.co/d/0hl0KAPm" target="_blank" rel="noopener noreferrer" aria-label="Buy the My Colorful Monsters coloring book on Amazon">Buy on Amazon ↗</a>
+            <a class="button secondary" href="#characters">Meet the Monsters</a>
+          </div>
+          <p class="note" style="margin-top:16px">Visit Amazon to see current pricing, availability, and purchase details.</p>
         </div>
       </div>
     </section>
