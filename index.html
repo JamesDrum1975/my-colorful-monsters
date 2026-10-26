@@ -72,6 +72,18 @@
     .book h2 { font-size: clamp(2.3rem,4.5vw,4rem); line-height: 1; letter-spacing: -.04em; }
     .book p { color: #eee2fa; font-size: 1.08rem; }
     .book .button.secondary { border-color: white; color: var(--ink); }
+    .page-previews { background: #fffaf0; }
+    .preview-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+    .preview-card { overflow: hidden; display: flex; flex-direction: column; background: #fff; border: 3px solid var(--ink); border-radius: 24px; box-shadow: 6px 7px 0 var(--ink); }
+    .preview-art { padding: 14px; background: #fff; border-bottom: 3px dashed #e6d9f5; }
+    .preview-art img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; background: #fff; }
+    .preview-caption { padding: 20px; flex: 1; }
+    .preview-caption h3 { font-size: 1.2rem; line-height: 1.15; margin-bottom: 8px; }
+    .preview-caption p { color: var(--muted); margin: 0; font-size: .96rem; }
+    .preview-cta { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 18px; margin-top: 38px; text-align: center; }
+    .preview-cta p { margin: 0; font-weight: 900; font-size: 1.1rem; }
+    @media (max-width: 800px) { .preview-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; } .preview-art img { aspect-ratio: 1 / 1; } .preview-cta { flex-direction: column; } }
+
     .details { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
     .details span { border: 1px solid rgba(255,255,255,.45); border-radius: 999px; padding: 7px 11px; font-size: .9rem; }
     .freebie { background: #fff0c8; }
@@ -472,6 +484,49 @@
             <a class="button secondary" href="#characters">Meet the Monsters</a>
           </div>
           <p class="note" style="margin-top:16px">Visit Amazon to see current pricing, availability, and purchase details.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page-previews" id="inside-the-book" aria-labelledby="page-previews-title">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">A peek inside</span>
+          <h2 id="page-previews-title">Take a Peek Inside the Book!</h2>
+          <p>Meet a few of the playful Halloween scenes waiting to be brought to life with color.</p>
+        </div>
+        <div class="preview-grid">
+          <article class="preview-card">
+            <div class="preview-art">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/carrying-pumpkin.png" alt="Black-and-white coloring page of a friendly winged monster carrying a giant pumpkin through an autumn forest" loading="lazy">
+            </div>
+            <div class="preview-caption">
+              <h3>Pumpkin Patch Adventure</h3>
+              <p>A giant pumpkin and an autumn forest full of details to color.</p>
+            </div>
+          </article>
+          <article class="preview-card">
+            <div class="preview-art">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/pond-monster.png" alt="Black-and-white coloring page of a friendly aquatic monster splashing in a pond beneath the Halloween moon" loading="lazy">
+            </div>
+            <div class="preview-caption">
+              <h3>Pond Monster Fun</h3>
+              <p>A happy pond creature surrounded by lily pads and Halloween night scenery.</p>
+            </div>
+          </article>
+          <article class="preview-card">
+            <div class="preview-art">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/gargoyle-pumpkin.png" alt="Black-and-white coloring page of a friendly gargoyle beside a giant jack-o'-lantern in a spooky autumn scene" loading="lazy">
+            </div>
+            <div class="preview-caption">
+              <h3>Gargoyle's Giant Pumpkin Night</h3>
+              <p>A cheerful monster, giant jack-o'-lanterns, and a moonlit Halloween scene.</p>
+            </div>
+          </article>
+        </div>
+        <div class="preview-cta">
+          <p>Ready to meet the whole monster crew?</p>
+          <a class="button primary" href="https://a.co/d/0hl0KAPm" target="_blank" rel="noopener noreferrer">Get Your Copy on Amazon ↗</a>
         </div>
       </div>
     </section>
