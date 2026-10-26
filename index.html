@@ -268,23 +268,24 @@
     .peekaboo-host { position: relative; }
     .peekaboo-character {
       position: absolute;
-      z-index: 3;
-      width: clamp(105px, 12vw, 175px);
+      z-index: 5;
+      width: clamp(155px, 16vw, 225px);
       height: auto;
       object-fit: contain;
       pointer-events: none;
       user-select: none;
       filter: drop-shadow(0 4px 2px rgba(44,21,84,.12));
     }
-    .peekaboo-furry { right: max(3%, calc((100% - 1180px) / 2)); bottom: 8px; }
-    .peekaboo-witch { left: max(3%, calc((100% - 1180px) / 2)); bottom: 8px; }
-    .peekaboo-zombie { right: max(4%, calc((100% - 1120px) / 2)); bottom: 8px; }
+    /* Align the character artwork to the section's visible bottom divider */
+    .peekaboo-furry { right: max(3%, calc((100% - 1180px) / 2)); bottom: -2px; }
+    .peekaboo-witch { left: max(3%, calc((100% - 1180px) / 2)); bottom: -2px; }
+    .peekaboo-zombie { right: max(4%, calc((100% - 1120px) / 2)); bottom: -2px; }
     @media (max-width: 800px) {
-      .peekaboo-character { width: clamp(82px, 22vw, 118px); }
-      .peekaboo-furry { right: 12px; bottom: 8px; }
-      .peekaboo-witch { left: 10px; bottom: 8px; }
-      .peekaboo-zombie { right: 10px; bottom: 8px; }
-      #world, #characters, #activities { padding-bottom: 84px; }
+      .peekaboo-character { width: clamp(118px, 29vw, 155px); }
+      .peekaboo-furry { right: 10px; bottom: -2px; }
+      .peekaboo-witch { left: 10px; bottom: -2px; }
+      .peekaboo-zombie { right: 10px; bottom: -2px; }
+      #world, #characters, #activities { padding-bottom: 96px; }
     }
 
   </style>
