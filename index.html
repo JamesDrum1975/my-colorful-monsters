@@ -99,6 +99,12 @@
     .freebie .freebie-panel p { color: #fff; text-shadow: 0 2px 7px rgba(0,0,0,.95); max-width: 760px; margin-bottom: 0; }
     .freebie-panel p + p { margin-top: 12px; }
     .freebie p { color: var(--muted); margin: 0; }
+    .youtube-section { background: linear-gradient(135deg,#fff0c8,#f4e8ff 55%,#e8f8ff); }
+    .youtube-inner { display: grid; grid-template-columns: 1.2fr .8fr; gap: 36px; align-items: center; background: rgba(255,255,255,.72); border: 3px dashed #7838c8; border-radius: 32px; padding: 38px; box-shadow: 7px 8px 0 rgba(44,21,84,.10); }
+    .youtube-copy h2 { font-size: clamp(2rem,4vw,3.1rem); line-height: 1.03; letter-spacing: -.04em; margin: 16px 0 14px; }
+    .youtube-copy p { color: #4c3d62; font-size: 1.05rem; max-width: 570px; }
+    .youtube-art { min-height: 210px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border-radius: 24px; background: linear-gradient(145deg,#6528a7,#35145e); border: 3px solid var(--ink); box-shadow: 5px 6px 0 var(--ink); color: white; text-align: center; font-weight: 900; letter-spacing: .08em; }
+    .youtube-play { width: 76px; height: 54px; display: grid; place-items: center; border-radius: 16px; background: #ff3434; color: white; font-size: 1.8rem; padding-left: 4px; box-shadow: 3px 4px 0 rgba(0,0,0,.22); }
     .about { background: var(--sky); }
     .about-inner { max-width: 760px; margin: auto; text-align: center; }
     .about-inner h2 { font-size: clamp(2rem,4vw,3.1rem); }
@@ -119,6 +125,8 @@
       .nav-cta { padding: 9px 14px; }
       .hero { padding: 38px 0 52px; }
       .hero-grid, .character-grid, .book-grid { grid-template-columns: 1fr; }
+      .youtube-inner { grid-template-columns: 1fr; padding: 26px 22px; }
+      .youtube-art { min-height: 160px; }
       .hero-art { max-width: 620px; margin: 0 auto; }
       .features { grid-template-columns: 1fr; }
       section { padding: 58px 0; }
@@ -322,6 +330,7 @@
         <a href="#world">Our World</a>
         <a href="#characters">Meet the Monsters</a>
         <a href="#book">The Coloring Book</a>
+        <a href="#videos">Videos</a>
         <a class="nav-cta" href="#book">Find the Book</a>
       </nav>
     </div>
@@ -462,6 +471,24 @@
             <p>Coloring pages are just the beginning. This space can grow to include printable puzzles, creative activities, and seasonal surprises featuring the original My Colorful Monsters crew.</p>
             <p class="note" style="margin-top:12px">Free downloads are coming soon.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="youtube-section" id="videos">
+      <div class="wrap youtube-inner">
+        <div class="youtube-copy">
+          <span class="eyebrow">📺 Watch &amp; explore</span>
+          <h2>My Colorful Monsters on YouTube</h2>
+          <p>Come meet the monsters in motion! Visit our YouTube channel for videos, character fun, and new surprises as the colorful world grows.</p>
+          <div class="actions">
+            <a class="button primary" href="https://www.youtube.com/@MyColorfulMonsters" target="_blank" rel="noopener noreferrer">Visit Our YouTube Channel ↗</a>
+            <a class="button secondary" href="https://www.youtube.com/@MyColorfulMonsters/videos" target="_blank" rel="noopener noreferrer">Watch Videos</a>
+          </div>
+        </div>
+        <div class="youtube-art" aria-hidden="true">
+          <div class="youtube-play">▶</div>
+          <span>NEW VIDEOS<br>COMING SOON</span>
         </div>
       </div>
     </section>
