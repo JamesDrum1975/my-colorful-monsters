@@ -506,7 +506,7 @@
             <div class="preview-caption">
               <h3>Pumpkin Patch Adventure</h3>
               <p>A giant pumpkin and an autumn forest full of details to color.</p>
-              <a class="button secondary preview-download" href="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/carrying-pumpkin.png" download="my-colorful-monsters-pumpkin-patch.png" target="_blank" rel="noopener noreferrer">Download coloring page ↓</a>
+              <a class="button secondary preview-download" href="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/carrying-pumpkin.png" download="my-colorful-monsters-pumpkin-patch.png">Download coloring page ↓</a>
             </div>
           </article>
           <article class="preview-card">
@@ -593,6 +593,38 @@
   </footer>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Force coloring-page downloads even though the images are hosted in a separate repository.
+    document.querySelectorAll('.preview-download').forEach((link) => {
+      link.addEventListener('click', async (event) => {
+        event.preventDefault();
+        const originalLabel = link.textContent;
+        link.textContent = 'Preparing download…';
+        link.setAttribute('aria-busy', 'true');
+        try {
+          const response = await fetch(link.href, { mode: 'cors' });
+          if (!response.ok) throw new Error('Image download failed');
+          const blob = await response.blob();
+          const objectUrl = URL.createObjectURL(blob);
+          const downloadLink = document.createElement('a');
+          downloadLink.href = objectUrl;
+          downloadLink.download = link.getAttribute('download') || 'coloring-page.png';
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          downloadLink.remove();
+          setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+          link.textContent = 'Downloaded ✓';
+          setTimeout(() => { link.textContent = originalLabel; }, 2200);
+        } catch (error) {
+          // Fallback if the browser or host blocks cross-origin fetching.
+          window.open(link.href, '_blank', 'noopener');
+          link.textContent = 'Open image to save';
+          setTimeout(() => { link.textContent = originalLabel; }, 2500);
+        } finally {
+          link.removeAttribute('aria-busy');
+        }
+      });
+    });
     (function () {
       const base = 'https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/';
       const imageVersion = '20261025';
