@@ -198,32 +198,39 @@
     .feature:nth-child(2) { border-radius:30px 12px 30px 30px; }
     .feature:nth-child(3) { border-radius:12px 30px 30px 30px; }
     .feature:hover { transform:translateY(-5px) rotate(-.5deg); }
-    /* Vampire stays behind the card and slides around its left edge when tapped */
+    /* Vampire is masked by the card face, then slides out from behind its left edge */
     #world .feature:first-child { position:relative; isolation:isolate; }
+    #world .feature:first-child::before {
+      content:"";
+      position:absolute;
+      z-index:1;
+      inset:3px;
+      border-radius:inherit;
+      background:inherit;
+      pointer-events:none;
+    }
     #world .feature:first-child .feature-vampire {
       position:absolute;
-      z-index:-1;
+      z-index:0;
       width:150px;
       max-width:none;
       height:auto;
-      left:-3px;
+      left:0;
       top:50%;
       pointer-events:none;
       user-select:none;
-      opacity:0;
       transform:translateX(0) translateY(-50%) scale(.88) rotate(-7deg);
       transform-origin:right center;
-      transition:transform .45s cubic-bezier(.2,.8,.2,1), opacity .2s ease, filter .45s ease;
+      transition:transform .45s cubic-bezier(.2,.8,.2,1), filter .45s ease;
       filter:drop-shadow(0 4px 2px rgba(44,21,84,.12));
     }
     #world .feature:first-child.vampire-pop-out .feature-vampire {
-      opacity:1;
       transform:translateX(-112px) translateY(-50%) scale(1) rotate(-3deg);
       filter:drop-shadow(0 7px 3px rgba(44,21,84,.18));
     }
     #world .feature:first-child .emoji,
     #world .feature:first-child h3,
-    #world .feature:first-child p { position:relative; z-index:1; }
+    #world .feature:first-child p { position:relative; z-index:2; }
     .feature .emoji { display:inline-grid; place-items:center; width:62px; height:62px; border:3px solid var(--ink); border-radius:22px; background:white; box-shadow:3px 4px 0 var(--ink); }
     .characters { background:linear-gradient(180deg,#fff 0%,#f9f0ff 100%); position:relative; }
     .character-art { background:#fff0c8; border:4px solid var(--ink); border-radius:38px 22px 38px 22px; box-shadow:8px 9px 0 var(--ink); }
