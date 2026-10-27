@@ -251,8 +251,8 @@
     .monster-card-description { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:20px 17px; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .28s ease, visibility .28s ease; }
     .monster-card-description p { margin:0; font-size:.94rem; line-height:1.42; color:#4c3d62; }
     .monster-card-hint { margin-top:auto; font-size:.72rem; font-weight:800; color:#655574; }
-    .monster-card:hover .monster-card-front, .monster-card:focus-within .monster-card-front, .monster-card.is-revealed .monster-card-front { opacity:0; }
-    .monster-card:hover .monster-card-description, .monster-card:focus-within .monster-card-description, .monster-card.is-revealed .monster-card-description { opacity:1; visibility:visible; }
+    .monster-card:hover .monster-card-front, .monster-card:focus-visible .monster-card-front, .monster-card.is-revealed .monster-card-front { opacity:0; }
+    .monster-card:hover .monster-card-description, .monster-card:focus-visible .monster-card-description, .monster-card.is-revealed .monster-card-description { opacity:1; visibility:visible; }
     .monster-gallery .section-head { margin-bottom:32px; }
     @media(max-width:800px) { .monster-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; } .monster-card { min-height:340px; padding:12px 10px; } .monster-card-front img { height:175px; } .monster-card-description { padding:16px 12px; gap:9px; } .monster-card-description p { font-size:.88rem; } }
     @media(max-width:420px) { .monster-card { min-height:350px; padding:10px 8px; } .monster-card-front img { height:145px; } .monster-card-description { padding:13px 10px; gap:8px; } .monster-card-description p { font-size:.82rem; line-height:1.35; } }
@@ -769,10 +769,15 @@
         card.addEventListener('pointerenter', (event) => {
           if (event.pointerType === 'mouse') playMonsterSound(card);
         });
-        card.addEventListener('focusin', () => playMonsterSound(card));
-        card.addEventListener('click', () => {
+        card.addEventListener('focusin', () => {
           playMonsterSound(card);
-          setRevealed(!card.classList.contains('is-revealed'));
+          if (card.matches(':focus-visible')) setRevealed(true);
+        });
+        card.addEventListener('click', (event) => {
+          playMonsterSound(card);
+          if (event.pointerType !== 'mouse') {
+            setRevealed(!card.classList.contains('is-revealed'));
+          }
         });
         card.addEventListener('keydown', (event) => {
           if (event.key === 'Enter' || event.key === ' ') {
