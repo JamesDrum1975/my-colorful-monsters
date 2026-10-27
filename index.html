@@ -238,23 +238,25 @@
     /* Original character gallery */
     .monster-gallery { padding: 76px 0 86px; background: #fffaf0; }
     .monster-gallery-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:22px; }
-    .monster-card { min-width:0; text-align:center; padding:16px 14px 18px; border:3px solid var(--ink); border-radius:26px 26px 26px 12px; background:#fff; box-shadow:5px 6px 0 var(--ink); transition:transform .2s ease; }
+    .monster-card { min-width:0; min-height:326px; position:relative; overflow:hidden; text-align:center; padding:14px; border:3px solid var(--ink); border-radius:26px 26px 26px 12px; background:#fff; box-shadow:5px 6px 0 var(--ink); transition:transform .2s ease; isolation:isolate; }
     .monster-card:nth-child(4n+2) { background:#f4e8ff; border-radius:26px 12px 26px 26px; }
     .monster-card:nth-child(4n+3) { background:#e7f8ff; border-radius:12px 26px 26px 26px; }
     .monster-card:nth-child(4n+4) { background:#fff0c8; }
     .monster-card:hover { transform:translateY(-5px) rotate(-1deg); }
     .monster-card[data-sound] { cursor:pointer; }
     .monster-card[data-sound]:focus-visible { outline:4px solid #ff69b4; outline-offset:5px; }
-    .monster-card img { width:100%; height:220px; object-fit:contain; object-position:center bottom; margin:0 auto 10px; }
-    /* Keep each character's visible artwork at a consistent visual scale */
-    .monster-card { display:flex; flex-direction:column; align-items:center; }
-    .monster-card img { width:100%; height:220px; object-fit:contain; object-position:center center; padding:8px; }
-    .monster-card h3 { margin-top:auto; }
-    .vampire-card img { transform: scale(1.12); }
-    .monster-card h3 { margin:0; font-size:1.12rem; }
+    .monster-card-front { width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; opacity:1; transition:opacity .28s ease; }
+    .monster-card-front img { width:100%; height:220px; object-fit:contain; object-position:center center; padding:8px; margin:0 auto 10px; }
+    .monster-card h3 { margin:0; font-size:1.12rem; line-height:1.2; }
+    .monster-card-description { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:20px 17px; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .28s ease, visibility .28s ease; }
+    .monster-card-description p { margin:0; font-size:.94rem; line-height:1.42; color:#4c3d62; }
+    .monster-card-hint { margin-top:auto; font-size:.72rem; font-weight:800; color:#655574; }
+    .monster-card:hover .monster-card-front, .monster-card:focus-within .monster-card-front, .monster-card.is-revealed .monster-card-front { opacity:0; }
+    .monster-card:hover .monster-card-description, .monster-card:focus-within .monster-card-description, .monster-card.is-revealed .monster-card-description { opacity:1; visibility:visible; }
     .monster-gallery .section-head { margin-bottom:32px; }
-    @media(max-width:800px) { .monster-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; } .monster-card img { height:175px; } }
-    @media(max-width:420px) { .monster-card { padding:10px 8px 13px; } .monster-card img { height:145px; } }
+    @media(max-width:800px) { .monster-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; } .monster-card { min-height:340px; padding:12px 10px; } .monster-card-front img { height:175px; } .monster-card-description { padding:16px 12px; gap:9px; } .monster-card-description p { font-size:.88rem; } }
+    @media(max-width:420px) { .monster-card { min-height:350px; padding:10px 8px; } .monster-card-front img { height:145px; } .monster-card-description { padding:13px 10px; gap:8px; } .monster-card-description p { font-size:.82rem; line-height:1.35; } }
+    @media(prefers-reduced-motion:reduce) { .monster-card-front,.monster-card-description { transition:none; } }
 
     /* Castle-world redesign: full-bleed storybook background */
     .hero {
@@ -473,37 +475,93 @@
           <p>Eight kinds of friendly characters, each ready to join your next coloring adventure. Hover over a monster—or tap it on a touchscreen—to hear its sound!</p>
         </div>
         <div class="monster-gallery-grid">
-          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-pond-monster.mp3" tabindex="0" aria-label="Little Pond Monster. Hover or tap to hear its sound.">
-            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Aquatic%20Monster%2001.png" alt="Original aquatic monster character" loading="lazy">
-            <h3>Little Pond Monster</h3>
+          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-pond-monster.mp3" tabindex="0" role="button" aria-pressed="false" aria-label="Little Pond Monster. Hover, focus, or tap to hear its sound and read its personality.">
+            <div class="monster-card-front">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Aquatic%20Monster%2001.png" alt="Original aquatic monster character" loading="lazy">
+              <h3>Little Pond Monster</h3>
+            </div>
+            <div class="monster-card-description" aria-hidden="true">
+              <h3>Little Pond Monster</h3>
+              <p>Little Pond Monster is a sweet, quiet little monster who takes his time warming up to new friends. Once he feels comfortable, his playful and silly side shines! He loves spending time with familiar friends but enjoys quiet moments on his own, too.</p>
+              <span class="monster-card-hint">Tap or select to see the character</span>
+            </div>
           </article>
-          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-zombie.mp3" tabindex="0" aria-label="Little Zombie. Hover or tap to hear its sound.">
-            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Zombie%2001.png" alt="Original zombie character" loading="lazy">
-            <h3>Little Zombie</h3>
+          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-zombie.mp3" tabindex="0" role="button" aria-pressed="false" aria-label="Little Zombie. Hover, focus, or tap to hear its sound and read its personality.">
+            <div class="monster-card-front">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Zombie%2001.png" alt="Original zombie character" loading="lazy">
+              <h3>Little Zombie</h3>
+            </div>
+            <div class="monster-card-description" aria-hidden="true">
+              <h3>Little Zombie</h3>
+              <p>Little Zombie is the gentle sweetheart of My Colorful Monsters! Though he doesn't speak, he shares his feelings through gestures, facial expressions, drawings, and playful demonstrations. His silly antics bring joy to his friends, who learn to understand his signals, work together, and trust the kindness behind everything he does.</p>
+              <span class="monster-card-hint">Tap or select to see the character</span>
+            </div>
           </article>
-          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-scarecrow.mp3" tabindex="0" aria-label="Little Scarecrow. Hover or tap to hear its sound.">
-            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Scarecrow%2001.png" alt="Original scarecrow character" loading="lazy">
-            <h3>Little Scarecrow</h3>
+          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-scarecrow.mp3" tabindex="0" role="button" aria-pressed="false" aria-label="Little Scarecrow. Hover, focus, or tap to hear its sound and read its personality.">
+            <div class="monster-card-front">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Scarecrow%2001.png" alt="Original scarecrow character" loading="lazy">
+              <h3>Little Scarecrow</h3>
+            </div>
+            <div class="monster-card-description" aria-hidden="true">
+              <h3>Little Scarecrow</h3>
+              <p>Little Scarecrow loves helping his friends, building useful things, and solving problems in creative ways. He believes in teamwork and is always ready to listen, offer comfort, and help a friend who feels sad or left out.</p>
+              <span class="monster-card-hint">Tap or select to see the character</span>
+            </div>
           </article>
-          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-skeleton.mp3" tabindex="0" aria-label="Little Skeleton. Hover or tap to hear its sound.">
-            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Skeleton%2001.png" alt="Original skeleton character" loading="lazy">
-            <h3>Little Skeleton</h3>
+          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-skeleton.mp3" tabindex="0" role="button" aria-pressed="false" aria-label="Little Skeleton. Hover, focus, or tap to hear its sound and read its personality.">
+            <div class="monster-card-front">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Skeleton%2001.png" alt="Original skeleton character" loading="lazy">
+              <h3>Little Skeleton</h3>
+            </div>
+            <div class="monster-card-description" aria-hidden="true">
+              <h3>Little Skeleton</h3>
+              <p>Little Skeleton is a laid-back daydreamer who quietly observes the world around him. Calm, thoughtful, and subtly funny, he notices little details that others miss. He may not say much, but when he does, his words often bring a clever observation, a helpful clue, or an unexpected laugh.</p>
+              <span class="monster-card-hint">Tap or select to see the character</span>
+            </div>
           </article>
-          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-vampire.mp3" tabindex="0" aria-label="Little Vampire. Hover or tap to hear its sound.">
-            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Vampire%2001.png" alt="Original vampire character" loading="lazy">
-            <h3>Little Vampire</h3>
+          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-vampire.mp3" tabindex="0" role="button" aria-pressed="false" aria-label="Little Vampire. Hover, focus, or tap to hear its sound and read its personality.">
+            <div class="monster-card-front">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Vampire%2001.png" alt="Original vampire character" loading="lazy">
+              <h3>Little Vampire</h3>
+            </div>
+            <div class="monster-card-description" aria-hidden="true">
+              <h3>Little Vampire</h3>
+              <p>Little Vampire is a confident, charming showman who loves being the center of attention! With grand entrances, fancy poses, witty remarks, and dramatic gestures, he turns even everyday moments into a performance. To him, life is always a chance to put on a show!</p>
+              <span class="monster-card-hint">Tap or select to see the character</span>
+            </div>
           </article>
-          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-werewolf.mp3" tabindex="0" aria-label="Little Werewolf. Hover or tap to hear its sound.">
-            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Werewolf%2001.png" alt="Original werewolf character" loading="lazy">
-            <h3>Little Werewolf</h3>
+          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-werewolf.mp3" tabindex="0" role="button" aria-pressed="false" aria-label="Little Werewolf. Hover, focus, or tap to hear its sound and read its personality.">
+            <div class="monster-card-front">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Werewolf%2001.png" alt="Original werewolf character" loading="lazy">
+              <h3>Little Werewolf</h3>
+            </div>
+            <div class="monster-card-description" aria-hidden="true">
+              <h3>Little Werewolf</h3>
+              <p>Little Werewolf is a brave, loyal, and protective friend who always looks out for others. He stands up for anyone being treated unfairly, even when it feels difficult. He knows that being brave doesn't mean never feeling scared—it means doing what's right even when you are.</p>
+              <span class="monster-card-hint">Tap or select to see the character</span>
+            </div>
           </article>
-          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-witch.mp3" tabindex="0" aria-label="Little Witch. Hover or tap to hear its sound.">
-            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Witch%2001.png" alt="Original witch character" loading="lazy">
-            <h3>Little Witch</h3>
+          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-witch.mp3" tabindex="0" role="button" aria-pressed="false" aria-label="Little Witch. Hover, focus, or tap to hear its sound and read its personality.">
+            <div class="monster-card-front">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Witch%2001.png" alt="Original witch character" loading="lazy">
+              <h3>Little Witch</h3>
+            </div>
+            <div class="monster-card-description" aria-hidden="true">
+              <h3>Little Witch</h3>
+              <p>Little Witch is an imaginative dreamer whose mind is full of stories, spells, and endless possibilities. She can turn an ordinary walk into a magical adventure or a simple object into a brilliant new idea. She loves exploring her imagination and sharing her wonderful ideas with friends.</p>
+              <span class="monster-card-hint">Tap or select to see the character</span>
+            </div>
           </article>
-          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-furry.mp3" tabindex="0" aria-label="Little Furry. Hover or tap to hear its sound.">
-            <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Furry%20Monster%2001.png" alt="Original furry monster character" loading="lazy">
-            <h3>Little Furry</h3>
+          <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-furry.mp3" tabindex="0" role="button" aria-pressed="false" aria-label="Little Furry. Hover, focus, or tap to hear its sound and read its personality.">
+            <div class="monster-card-front">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/Furry%20Monster%2001.png" alt="Original furry monster character" loading="lazy">
+              <h3>Little Furry</h3>
+            </div>
+            <div class="monster-card-description" aria-hidden="true">
+              <h3>Little Furry</h3>
+              <p>Little Furry is a goofy, energetic monster who loves making everyone laugh! Whether he’s dancing, making silly faces, or trying his next funny idea, he’s always ready for fun. Beneath all that goofiness, he has a big heart and cares deeply about his friends.</p>
+              <span class="monster-card-hint">Tap or select to see the character</span>
+            </div>
           </article>
         </div>
       </div>
@@ -702,16 +760,27 @@
       }
 
       cards.forEach((card) => {
+        const description = card.querySelector('.monster-card-description');
+        const setRevealed = (revealed) => {
+          card.classList.toggle('is-revealed', revealed);
+          card.setAttribute('aria-pressed', String(revealed));
+          if (description) description.setAttribute('aria-hidden', String(!revealed));
+        };
         card.addEventListener('pointerenter', (event) => {
           if (event.pointerType === 'mouse') playMonsterSound(card);
         });
         card.addEventListener('focusin', () => playMonsterSound(card));
-        card.addEventListener('click', () => playMonsterSound(card));
+        card.addEventListener('click', () => {
+          playMonsterSound(card);
+          setRevealed(!card.classList.contains('is-revealed'));
+        });
         card.addEventListener('keydown', (event) => {
           if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
             playMonsterSound(card);
+            setRevealed(!card.classList.contains('is-revealed'));
           }
+          if (event.key === 'Escape') setRevealed(false);
         });
       });
     })();
