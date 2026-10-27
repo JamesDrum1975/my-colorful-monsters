@@ -198,6 +198,28 @@
     .feature:nth-child(2) { border-radius:30px 12px 30px 30px; }
     .feature:nth-child(3) { border-radius:12px 30px 30px 30px; }
     .feature:hover { transform:translateY(-5px) rotate(-.5deg); }
+    /* A tiny vampire surprise beside the first welcome card */
+    #world .feature:first-child { position:relative; }
+    .feature-vampire {
+      position:absolute;
+      z-index:2;
+      width:150px;
+      height:auto;
+      left:-128px;
+      bottom:18px;
+      pointer-events:none;
+      user-select:none;
+      transform:translateX(-24px) rotate(-9deg) scale(.9);
+      transform-origin:bottom right;
+      transition:transform .42s cubic-bezier(.2,.8,.2,1), filter .42s ease;
+      filter:drop-shadow(0 4px 2px rgba(44,21,84,.12));
+    }
+    #world .feature:first-child:hover .feature-vampire,
+    #world .feature:first-child.vampire-pop-out .feature-vampire {
+      transform:translateX(7px) translateY(-8px) rotate(3deg) scale(1.04);
+      filter:drop-shadow(0 7px 3px rgba(44,21,84,.18));
+    }
+    .feature .emoji, .feature h3, .feature p { position:relative; z-index:1; }
     .feature .emoji { display:inline-grid; place-items:center; width:62px; height:62px; border:3px solid var(--ink); border-radius:22px; background:white; box-shadow:3px 4px 0 var(--ink); }
     .characters { background:linear-gradient(180deg,#fff 0%,#f9f0ff 100%); position:relative; }
     .character-art { background:#fff0c8; border:4px solid var(--ink); border-radius:38px 22px 38px 22px; box-shadow:8px 9px 0 var(--ink); }
@@ -454,6 +476,7 @@
         </div>
         <div class="features">
           <article class="feature">
+            <img class="feature-vampire" src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/vampire-peekaboo.png?v=20261027" alt="" aria-hidden="true">
             <div class="emoji" aria-hidden="true">🖍️</div>
             <h3>Color your way</h3>
             <p>Make every monster your own with your favorite colors, patterns, and ideas.</p>
@@ -739,6 +762,20 @@
   </footer>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hidden vampire surprise: hover or tap the first welcome card to pop him out.
+    (function () {
+      const card = document.querySelector('#world .feature:first-child');
+      if (!card) return;
+      card.addEventListener('click', () => {
+        if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+          card.classList.toggle('vampire-pop-out');
+        }
+      });
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') card.classList.remove('vampire-pop-out');
+      });
+    })();
 
     // Hidden book-cover Easter egg: click the cover to play or pause the theme song.
     (function () {
