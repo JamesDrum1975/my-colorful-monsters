@@ -115,6 +115,18 @@
     .freebie-panel p + p { margin-top: 12px; }
     .freebie p { color: var(--muted); margin: 0; }
     .youtube-section { background: linear-gradient(135deg,#fff0c8,#f4e8ff 55%,#e8f8ff); }
+
+    .monster-media-section { background: linear-gradient(135deg,#fff0c8,#f4e8ff 55%,#e8f8ff); }
+    .media-grid { display:grid; gap:28px; }
+    .theme-song-card, .watch-monsters-card { display:grid; grid-template-columns:minmax(220px,.75fr) minmax(0,1.25fr); gap:30px; align-items:center; background:rgba(255,255,255,.78); border:3px dashed #7838c8; border-radius:32px; padding:30px; box-shadow:7px 8px 0 rgba(44,21,84,.10); }
+    .theme-artwork { max-width:360px; width:100%; justify-self:center; overflow:hidden; border:4px solid var(--ink); border-radius:26px; box-shadow:6px 7px 0 var(--ink); background:white; }
+    .theme-artwork img { width:100%; aspect-ratio:1 / 1; object-fit:cover; }
+    .theme-song-copy h3, .watch-monsters-card h3 { font-size:clamp(1.7rem,3.5vw,2.5rem); line-height:1.05; letter-spacing:-.035em; margin:14px 0; }
+    .theme-song-copy p, .watch-monsters-card p { color:#4c3d62; font-size:1.05rem; }
+    .theme-song-copy audio { display:block; width:100%; max-width:560px; margin-top:20px; }
+    .watch-monsters-card { grid-template-columns:minmax(0,1fr) minmax(220px,.8fr); }
+    @media (max-width:800px) { .theme-song-card, .watch-monsters-card { grid-template-columns:1fr; padding:22px; } .theme-artwork { max-width:300px; } .watch-monsters-card .youtube-video-wrap { order:-1; } }
+
     .youtube-inner { display: grid; grid-template-columns: 1.2fr .8fr; gap: 36px; align-items: center; background: rgba(255,255,255,.72); border: 3px dashed #7838c8; border-radius: 32px; padding: 38px; box-shadow: 7px 8px 0 rgba(44,21,84,.10); }
     .youtube-copy h2 { font-size: clamp(2rem,4vw,3.1rem); line-height: 1.03; letter-spacing: -.04em; margin: 16px 0 14px; }
     .youtube-copy p { color: #4c3d62; font-size: 1.05rem; max-width: 570px; }
@@ -382,7 +394,7 @@
         <a href="#characters">Meet the Monsters</a>
         <a class="nav-cta" href="#book">Coloring Book</a>
         <a href="#activities">Activities</a>
-        <a href="#videos">Videos</a>
+        <a href="#media">Monster Media</a>
       </nav>
     </div>
   </header>
@@ -575,19 +587,42 @@
       </div>
     </section>
 
-    <section class="youtube-section" id="videos">
-      <div class="wrap youtube-inner">
-        <div class="youtube-copy">
-          <span class="eyebrow">📺 Watch &amp; explore</span>
-          <h2>My Colorful Monsters on YouTube</h2>
-          <p>Come meet the monsters in motion! Visit our YouTube channel for videos, character fun, and new surprises as the colorful world grows.</p>
-          <div class="actions">
-            <a class="button primary" href="https://www.youtube.com/@MyColorfulMonsters" target="_blank" rel="noopener noreferrer">Visit Our YouTube Channel ↗</a>
-            <a class="button secondary" href="https://www.youtube.com/@MyColorfulMonsters/videos" target="_blank" rel="noopener noreferrer">Watch Videos</a>
-          </div>
+    <section class="youtube-section monster-media-section" id="media">
+      <div class="wrap">
+        <div class="section-head">
+          <span class="eyebrow">🎵 Listen, watch &amp; explore</span>
+          <h2>Monster Media</h2>
+          <p>The fun doesn't stop on the page! Sing along with our monster theme song and watch our friendly crew come to life in videos and adventures.</p>
         </div>
-        <div class="youtube-video-wrap">
-          <iframe class="youtube-video" src="https://www.youtube-nocookie.com/embed/V57S-OtK2mo" title="My Colorful Monsters YouTube Short" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="media-grid">
+          <article class="theme-song-card">
+            <div class="theme-artwork">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/my-colorful-monsters-theme-artwork.jpg" alt="My Colorful Monsters theme song artwork" loading="lazy">
+            </div>
+            <div class="theme-song-copy">
+              <span class="eyebrow">🎶 Sing along!</span>
+              <h3>The My Colorful Monsters Theme Song</h3>
+              <p>Meet the monsters through their very own theme song. Press play and sing along!</p>
+              <audio controls preload="metadata" aria-label="Listen to the My Colorful Monsters theme song">
+                <source src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/my-colorful-monsters-theme-song.mp3" type="audio/mpeg">
+                Your browser does not support audio playback.
+              </audio>
+            </div>
+          </article>
+          <article class="watch-monsters-card">
+            <div class="youtube-copy">
+              <span class="eyebrow">📺 Watch &amp; explore</span>
+              <h3>Watch the Monsters</h3>
+              <p>Come meet the monsters in motion! Visit our YouTube channel for videos, character fun, and new surprises as the colorful world grows.</p>
+              <div class="actions">
+                <a class="button primary" href="https://www.youtube.com/@MyColorfulMonsters" target="_blank" rel="noopener noreferrer">Visit Our YouTube Channel ↗</a>
+                <a class="button secondary" href="https://www.youtube.com/@MyColorfulMonsters/videos" target="_blank" rel="noopener noreferrer">Watch Videos</a>
+              </div>
+            </div>
+            <div class="youtube-video-wrap">
+              <iframe class="youtube-video" src="https://www.youtube-nocookie.com/embed/V57S-OtK2mo" title="My Colorful Monsters YouTube Short" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </article>
         </div>
       </div>
     </section>
