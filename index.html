@@ -669,6 +669,16 @@
         }
         const audio = new Audio(card.dataset.sound);
         audio.preload = 'none';
+        // Boost character clips on mobile while keeping a safe, browser-limited level.
+        audio.volume = 1;
+        audio.addEventListener('loadedmetadata', () => {
+          try {
+            if (audio.duration && Number.isFinite(audio.duration)) {
+              // Keep playback at full element volume; phones control final output via device volume.
+              audio.volume = 1;
+            }
+          } catch (_) {}
+        }, { once: true });
         activeAudio = audio;
         activeCard = card;
         const playback = audio.play();
