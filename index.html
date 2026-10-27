@@ -198,25 +198,26 @@
     .feature:nth-child(2) { border-radius:30px 12px 30px 30px; }
     .feature:nth-child(3) { border-radius:12px 30px 30px 30px; }
     .feature:hover { transform:translateY(-5px) rotate(-.5deg); }
-    /* A tiny vampire surprise beside the first welcome card */
+    /* Hidden vampire surprise: tap the first welcome card to pop him from its edge */
     #world .feature:first-child { position:relative; }
     .feature-vampire {
       position:absolute;
       z-index:2;
-      width:150px;
+      width:130px;
       height:auto;
-      left:-128px;
-      bottom:18px;
+      left:-85px;
+      bottom:50%;
       pointer-events:none;
       user-select:none;
-      transform:translateX(-24px) rotate(-9deg) scale(.9);
-      transform-origin:bottom right;
-      transition:transform .42s cubic-bezier(.2,.8,.2,1), filter .42s ease;
+      opacity:0;
+      transform:translateX(-30px) translateY(50%) scale(.72) rotate(-8deg);
+      transform-origin:right center;
+      transition:transform .38s cubic-bezier(.2,.8,.2,1), opacity .18s ease, filter .38s ease;
       filter:drop-shadow(0 4px 2px rgba(44,21,84,.12));
     }
-    #world .feature:first-child:hover .feature-vampire,
     #world .feature:first-child.vampire-pop-out .feature-vampire {
-      transform:translateX(7px) translateY(-8px) rotate(3deg) scale(1.04);
+      opacity:1;
+      transform:translateX(0) translateY(50%) scale(1) rotate(0);
       filter:drop-shadow(0 7px 3px rgba(44,21,84,.18));
     }
     .feature .emoji, .feature h3, .feature p { position:relative; z-index:1; }
@@ -763,17 +764,12 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Hidden vampire surprise: hover or tap the first welcome card to pop him out.
+    // Hidden vampire surprise: tap the first welcome card to pop him out and tuck him away.
     (function () {
       const card = document.querySelector('#world .feature:first-child');
       if (!card) return;
       card.addEventListener('click', () => {
-        if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
-          card.classList.toggle('vampire-pop-out');
-        }
-      });
-      card.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') card.classList.remove('vampire-pop-out');
+        card.classList.toggle('vampire-pop-out');
       });
     })();
 
