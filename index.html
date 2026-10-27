@@ -590,7 +590,7 @@
 
     <section class="book" id="book">
       <div class="wrap book-grid">
-        <div class="book-image">
+        <div class="book-image" id="book-cover-easter-egg" role="button" tabindex="0" aria-label="My Colorful Monsters coloring book cover">
           <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/coloring-book-cover.png" alt="Cover of the My Colorful Monsters Halloween coloring book, featuring the original friendly monster crew">
         </div>
         <div class="book-copy">
@@ -739,6 +739,34 @@
   </footer>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Hidden book-cover Easter egg: click the cover to play or pause the theme song.
+    (function () {
+      const cover = document.getElementById('book-cover-easter-egg');
+      const themeSong = document.querySelector('.theme-song-copy audio');
+      if (!cover || !themeSong) return;
+
+      function toggleThemeSong() {
+        if (themeSong.paused) {
+          const playback = themeSong.play();
+          if (playback && typeof playback.catch === 'function') {
+            playback.catch(() => {
+              // Playback may be blocked by the browser or unavailable while offline.
+            });
+          }
+        } else {
+          themeSong.pause();
+        }
+      }
+
+      cover.addEventListener('click', toggleThemeSong);
+      cover.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggleThemeSong();
+        }
+      });
+    })();
 
     // Monster character sounds: only currently uploaded sound files are enabled.
     (function () {
