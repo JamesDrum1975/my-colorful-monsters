@@ -325,6 +325,18 @@
     }
     input, button, textarea, select { font-family: "Nunito", "Trebuchet MS", Arial, sans-serif; }
 
+
+    /* Align Original Crew copy vertically with the circular character badge */
+    #characters .character-copy {
+      align-self: center;
+      transform: translateY(18px);
+    }
+    @media (max-width: 800px) {
+      #characters .character-copy {
+        transform: none;
+      }
+    }
+
     /* Ensure the Original Crew badge has no surrounding frame */
     .character-art,
     .characters .character-art {
@@ -466,11 +478,6 @@
           <span class="eyebrow">The original crew</span>
           <h2>Every monster has a little personality</h2>
           <p>From fuzzy friends to Halloween favorites, the My Colorful Monsters crew brings its own kind of charm to every page. These are the established characters from the brand — the same crew fans can get to know as the world grows.</p>
-          <div class="pill-list">
-            <span class="pill">🎃 Halloween fun</span>
-            <span class="pill">🦇 Curious characters</span>
-            <span class="pill">🖍️ Creative play</span>
-          </div>
           <a class="button secondary" href="#book">Color with the crew</a>
         </div>
       </div>
