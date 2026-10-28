@@ -261,6 +261,10 @@
     .about-inner .eyebrow { background:#c7f464; }
     .footer { border-top:7px solid #c7f464; }
     .footer-links a:hover { color:#ffcf5a; }
+    .footer-links .social-link { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:#1877f2; color:#fff; transition:transform .18s ease, background .18s ease; }
+    .footer-links .social-link:hover { color:#fff; background:#0f65d8; transform:translateY(-2px); }
+    .footer-links .social-link svg { width:20px; height:20px; fill:currentColor; }
+    .footer-links .social-link:focus-visible { outline:3px solid #ff69b4; outline-offset:4px; }
     a:focus-visible { outline:4px solid #ff69b4; outline-offset:4px; }
     @media (max-width:800px) {
       .hero { padding:42px 0 64px; }
@@ -773,6 +777,9 @@
         <a href="#activities">Activities</a>
         <a href="#media">Monster Media</a>
         <a href="privacy.html">Privacy Policy</a>
+        <a class="social-link" href="https://www.facebook.com/MyColorfulMonsters/" target="_blank" rel="noopener noreferrer" aria-label="Visit My Colorful Monsters on Facebook" title="Follow us on Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.17 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.026 1.792-4.7 4.533-4.7 1.312 0 2.686.236 2.686.236v2.97h-1.513c-1.49 0-1.955.93-1.955 1.887v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.17 24 18.1 24 12.073Z"/></svg>
+        </a>
       </div>
     </div>
   </footer>
