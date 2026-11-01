@@ -1,0 +1,55 @@
+name: Publish My Colorful Monsters Theme Video
+
+on:
+  schedule:
+    # November 4, 2026 at 12:00 PM Eastern (EST = UTC-5)
+    - cron: "0 17 4 11 *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish-theme-video:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v4
+
+      - name: Publish the scheduled music video
+        run: |
+          if [ "$(date -u +%F)" != "2026-11-04" ]; then
+            echo "This one-time launch is only scheduled for November 4, 2026 UTC."
+            exit 0
+          fi
+
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+
+          old_iframe = '<iframe class="youtube-video" src="https://www.youtube-nocookie.com/embed/V57S-OtK2mo" title="My Colorful Monsters YouTube Short" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+          new_iframe = '<iframe class="youtube-video" src="https://www.youtube-nocookie.com/embed/h9H-T20xBRc" title="My Colorful Monsters Theme Song Animated Music Video" loading="lazy" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'
+
+          if old_iframe not in html:
+              raise SystemExit("Expected existing featured-video iframe was not found; website was not changed.")
+
+          html = html.replace(old_iframe, new_iframe, 1)
+
+          old_css = ".youtube-video { display: block; width: 100%; aspect-ratio: 9 / 16; border: 0; }"
+          new_css = ".youtube-video { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }"
+          if old_css not in html:
+              raise SystemExit("Expected featured-video sizing rule was not found; website was not changed.")
+
+          html = html.replace(old_css, new_css, 1)
+          html = html.replace(".youtube-video-wrap { width: 100%; max-width: 330px;", ".youtube-video-wrap { width: 100%; max-width: 500px;", 1)
+
+          path.write_text(html, encoding="utf-8")
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Publish My Colorful Monsters theme music video"
+          git push
