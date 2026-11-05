@@ -114,6 +114,14 @@
     .freebie .freebie-panel p { color: #fff; text-shadow: 0 2px 7px rgba(0,0,0,.95); max-width: 760px; margin-bottom: 0; }
     .freebie-panel p + p { margin-top: 12px; }
     .freebie p { color: var(--muted); margin: 0; }
+    .music-feature { padding: 34px 0; background: linear-gradient(135deg,#fff0c8,#f4e8ff 55%,#e8f8ff); }
+    .music-feature-card { display:grid; grid-template-columns:minmax(0,1fr) minmax(260px,.85fr); gap:30px; align-items:center; padding:26px; background:rgba(255,255,255,.82); border:3px dashed #7838c8; border-radius:32px; box-shadow:7px 8px 0 rgba(44,21,84,.10); }
+    .music-feature-copy h2 { font-size:clamp(1.9rem,4vw,3rem); line-height:1.03; letter-spacing:-.04em; margin:14px 0; }
+    .music-feature-copy p { color:#4c3d62; font-size:1.05rem; max-width:560px; }
+    .music-feature-art { display:block; overflow:hidden; border:3px solid var(--ink); border-radius:24px; box-shadow:5px 6px 0 var(--ink); background:#251044; }
+    .music-feature-art img { width:100%; aspect-ratio:16 / 9; object-fit:cover; }
+    @media (max-width:800px) { .music-feature { padding:26px 0; } .music-feature-card { grid-template-columns:1fr; padding:22px; } .music-feature-art { order:-1; } }
+
     .youtube-section { background: linear-gradient(135deg,#fff0c8,#f4e8ff 55%,#e8f8ff); }
 
     .monster-media-section { background: linear-gradient(135deg,#fff0c8,#f4e8ff 55%,#e8f8ff); }
@@ -486,6 +494,25 @@
             <a class="button primary" href="#book">Explore the Coloring Book</a>
             <a class="button secondary" href="#characters">Meet the Crew</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="music-feature" id="new-music-video-feature" aria-labelledby="music-feature-title">
+      <div class="wrap">
+        <div class="music-feature-card">
+          <div class="music-feature-copy">
+            <span class="eyebrow">🎵 Brand-new monster music!</span>
+            <h2 id="music-feature-title">Our New Music Video Is Here!</h2>
+            <p>Our friendly monsters are ready to sing, dance, and bring a little extra fun to your day. Come watch their latest musical adventure!</p>
+            <div class="actions">
+              <a class="button primary" href="#media">Watch the Music Video ↓</a>
+              <a class="button secondary" href="https://youtu.be/h9H-T20xBRc" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
+            </div>
+          </div>
+          <a class="music-feature-art" href="#media" aria-label="Go to the My Colorful Monsters music video in Monster Media">
+            <img src="https://img.youtube.com/vi/h9H-T20xBRc/hqdefault.jpg" alt="Preview image for the new My Colorful Monsters music video" loading="lazy">
+          </a>
         </div>
       </div>
     </section>
