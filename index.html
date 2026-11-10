@@ -469,6 +469,28 @@
       #activities .preview-grid { grid-template-columns: 1fr; max-width: 360px; }
     }
 
+
+    /* Two-book collection layout */
+    .book-section-head { color:#fff; }
+    .book-section-head p { color:#eee2fa; }
+    .books-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:30px; align-items:stretch; }
+    .book-card { min-width:0; display:flex; flex-direction:column; gap:24px; padding:28px; border:3px dashed rgba(255,255,255,.42); border-radius:30px; background:rgba(255,255,255,.08); }
+    .books-grid .book-image { width:min(100%,340px); margin:0 auto; transform:rotate(-1deg); }
+    .books-grid .book-image img { width:100%; }
+    .books-grid .book-copy { display:flex; flex-direction:column; align-items:flex-start; flex:1; }
+    .books-grid .book-copy h3 { color:#fff; font-size:clamp(1.7rem,3vw,2.35rem); line-height:1.05; letter-spacing:-.035em; margin:12px 0; }
+    .books-grid .book-copy p { color:#eee2fa; }
+    .books-grid .book-highlights { padding-left:0; list-style:none; margin:10px 0 16px; }
+    .books-grid .book-highlights li { margin:8px 0; color:#fff; }
+    .books-grid .book-highlights li span { color:#c7f464; font-weight:900; margin-right:8px; }
+    .books-grid .details { margin-top:auto; }
+    .books-grid .book-actions { margin-top:12px; }
+    .books-grid .button.secondary { border-color:#fff; }
+    .book-section-note { text-align:center; margin:26px 0 0; color:#eee2fa; }
+    @media (max-width:800px) {
+      .books-grid { grid-template-columns:1fr; max-width:560px; margin-inline:auto; }
+      .book-card { padding:22px; }
+    }
   </style>
 </head>
 <body>
@@ -656,28 +678,60 @@
     </section>
 
     <section class="book" id="book">
-      <div class="wrap book-grid">
-        <div class="book-image" id="book-cover-easter-egg" role="button" tabindex="0" aria-label="My Colorful Monsters coloring book cover">
-          <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/coloring-book-cover.png" alt="Cover of the My Colorful Monsters Halloween coloring book, featuring the original friendly monster crew">
-        </div>
-        <div class="book-copy">
-          <span class="eyebrow">The first adventure · Available now</span>
+      <div class="wrap">
+        <div class="section-head book-section-head">
+          <span class="eyebrow">Two books · More monster adventures</span>
           <h2>Bring the monsters to your coloring table</h2>
-          <p>Meet the My Colorful Monsters coloring book: a Halloween-themed collection of friendly monster scenes that invites young artists to get creative and make each page their own.</p>
-          <ul class="book-highlights" aria-label="Coloring book highlights">
-            <li><span aria-hidden="true">✓</span> 40 original coloring pages</li>
-            <li><span aria-hidden="true">✓</span> Friendly Halloween monster characters</li>
-            <li><span aria-hidden="true">✓</span> Square 8.5 × 8.5-inch paperback</li>
-          </ul>
-          <div class="details">
-            <span>Paperback</span><span>Original monster crew</span><span>Creative Halloween fun</span>
-          </div>
-          <div class="actions book-actions">
-            <a class="button primary" href="https://a.co/d/0hl0KAPm" target="_blank" rel="noopener noreferrer" aria-label="Buy the My Colorful Monsters coloring book on Amazon">Buy on Amazon ↗</a>
-            <a class="button secondary" href="#characters">Meet the Monsters</a>
-          </div>
-          <p class="note" style="margin-top:16px">Visit Amazon to see current pricing, availability, and purchase details.</p>
+          <p>Choose your adventure! Meet the friendly monster crew in our original Halloween coloring book or join them for a brand-new winter adventure.</p>
         </div>
+        <div class="books-grid">
+          <article class="book-card">
+            <div class="book-image" id="book-cover-easter-egg" role="button" tabindex="0" aria-label="My Colorful Monsters Halloween coloring book cover">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/coloring-book-cover.png" alt="Cover of the original My Colorful Monsters Halloween coloring book, featuring the friendly monster crew" loading="lazy">
+            </div>
+            <div class="book-copy">
+              <span class="eyebrow">The original adventure</span>
+              <h3>My Colorful Monsters</h3>
+              <p>Meet the monster crew in this Halloween-themed collection of friendly scenes made for creative fun and imaginative coloring.</p>
+              <ul class="book-highlights" aria-label="Original coloring book highlights">
+                <li><span aria-hidden="true">✓</span> 40 original coloring pages</li>
+                <li><span aria-hidden="true">✓</span> Friendly Halloween monster characters</li>
+                <li><span aria-hidden="true">✓</span> Square 8.5 × 8.5-inch paperback</li>
+              </ul>
+              <div class="details">
+                <span>Paperback</span><span>Original monster crew</span><span>Halloween fun</span>
+              </div>
+              <div class="actions book-actions">
+                <a class="button primary" href="https://a.co/d/0hl0KAPm" target="_blank" rel="noopener noreferrer" aria-label="Buy the original My Colorful Monsters coloring book on Amazon">Buy on Amazon ↗</a>
+                <a class="button secondary" href="#characters">Meet the Monsters</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="book-card winter-book-card">
+            <div class="book-image winter-book-image">
+              <img src="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/My-Colorful-Monsters-Winter-Coloring-Book.png" alt="Cover of My Colorful Monsters: Winter Wonders &amp; Monster Adventures" loading="lazy">
+            </div>
+            <div class="book-copy">
+              <span class="eyebrow">The newest adventure · Available now</span>
+              <h3>Winter Wonders &amp; Monster Adventures</h3>
+              <p>Bundle up and join all eight friendly monsters for a wintertime coloring adventure filled with snowy fun, cozy moments, and seasonal surprises.</p>
+              <ul class="book-highlights" aria-label="Winter coloring book highlights">
+                <li><span aria-hidden="true">✓</span> 40 original winter coloring pages</li>
+                <li><span aria-hidden="true">✓</span> All eight original monster friends</li>
+                <li><span aria-hidden="true">✓</span> Square 8.5 × 8.5-inch paperback</li>
+              </ul>
+              <div class="details">
+                <span>Paperback</span><span>Winter adventures</span><span>Creative seasonal fun</span>
+              </div>
+              <div class="actions book-actions">
+                <a class="button primary" href="https://a.co/d/067skX7v" target="_blank" rel="noopener noreferrer" aria-label="Buy Winter Wonders and Monster Adventures on Amazon">Buy on Amazon ↗</a>
+                <a class="button secondary" href="#characters">Meet the Monsters</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="note book-section-note">Visit Amazon to see current pricing, availability, and purchase details.</p>
       </div>
     </section>
 
