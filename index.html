@@ -878,22 +878,34 @@
       });
     })();
 
-    // Book-cover reveal sounds: restart cleanly on each hover or keyboard focus.
+    // Book-cover reveal sounds: reusable players with a clean reset after every clip.
     (function () {
       const base = 'https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/';
       const covers = [
         { element: document.getElementById('book-cover-easter-egg'), sound: base + 'spooky-halloween.wav' },
         { element: document.querySelector('.winter-book-image'), sound: base + 'christmas-reveal.wav' }
       ];
+      const players = covers.map(({ sound }) => {
+        const audio = new Audio(sound);
+        audio.preload = 'auto';
+        audio.volume = 0.3;
+        audio.addEventListener('ended', () => {
+          audio.currentTime = 0;
+        });
+        audio.addEventListener('error', () => {
+          console.warn('Book-cover sound could not load:', sound, audio.error);
+        });
+        return audio;
+      });
       let activeAudio = null;
 
-      function playCoverSound(sound) {
-        if (activeAudio) {
+      function playCoverSound(audio) {
+        if (activeAudio && activeAudio !== audio) {
           activeAudio.pause();
           activeAudio.currentTime = 0;
         }
-        const audio = new Audio(sound);
-        audio.preload = 'auto';
+        audio.pause();
+        audio.currentTime = 0;
         audio.volume = 0.3;
         activeAudio = audio;
         const playback = audio.play();
@@ -902,19 +914,18 @@
             console.warn('Book-cover sound playback was blocked or unavailable:', error);
           });
         }
-        audio.addEventListener('ended', () => {
-          if (activeAudio === audio) activeAudio = null;
-        }, { once: true });
       }
 
-      covers.forEach(({ element, sound }) => {
+      covers.forEach(({ element }, index) => {
         if (!element) return;
-        element.addEventListener('pointerenter', () => playCoverSound(sound));
-        element.addEventListener('focusin', () => playCoverSound(sound));
+        const audio = players[index];
+        element.addEventListener('pointerenter', () => playCoverSound(audio));
+        element.addEventListener('click', () => playCoverSound(audio));
+        element.addEventListener('focusin', () => playCoverSound(audio));
       });
     })();
 
-    // Monster character sounds: only currently uploaded sound files are enabled.
+    // Monster character sounds: retain the existing card behavior at a gentle 30% level.
     (function () {
       const cards = document.querySelectorAll('.monster-card[data-sound]');
       let activeAudio = null;
@@ -927,23 +938,20 @@
           activeAudio.currentTime = 0;
         }
         const audio = new Audio(card.dataset.sound);
-        audio.preload = 'none';
-        // Keep character sound effects at a gentle 30% volume.
+        audio.preload = 'auto';
         audio.volume = 0.3;
         audio.addEventListener('loadedmetadata', () => {
-          try {
-            if (audio.duration && Number.isFinite(audio.duration)) {
-              // Maintain the same gentle 30% level after metadata loads.
-              audio.volume = 0.3;
-            }
-          } catch (_) {}
+          audio.volume = 0.3;
+        }, { once: true });
+        audio.addEventListener('error', () => {
+          console.warn('Monster sound could not load:', card.dataset.sound, audio.error);
         }, { once: true });
         activeAudio = audio;
         activeCard = card;
         const playback = audio.play();
         if (playback && typeof playback.catch === 'function') {
-          playback.catch(() => {
-            // Some browsers require a click/tap before allowing sound playback.
+          playback.catch((error) => {
+            console.warn('Monster sound playback was blocked or unavailable:', error);
           });
         }
         audio.addEventListener('ended', () => {
@@ -970,7 +978,6 @@
         });
         card.addEventListener('click', () => {
           playMonsterSound(card);
-          // Touch-first devices toggle the card on every tap, including the tap that hides it.
           if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
             setRevealed(!card.classList.contains('is-revealed'));
           }
@@ -985,7 +992,6 @@
         });
       });
     })();
-
 
     // Force coloring-page downloads even though the images are hosted in a separate repository.
     document.querySelectorAll('.preview-download').forEach((link) => {
