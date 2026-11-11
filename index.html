@@ -906,6 +906,44 @@
       });
     })();
 
+    // Book-cover hover sounds: each cover plays its own short reveal effect.
+    (function () {
+      const base = 'https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/';
+      const covers = [
+        { element: document.getElementById('book-cover-easter-egg'), sound: base + 'spooky-halloween.wav' },
+        { element: document.querySelector('.winter-book-image'), sound: base + 'christmas-reveal.wav' }
+      ];
+      let activeAudio = null;
+
+      function playCoverSound(sound) {
+        if (activeAudio) {
+          activeAudio.pause();
+          activeAudio.currentTime = 0;
+        }
+        const audio = new Audio(sound);
+        audio.preload = 'none';
+        audio.volume = 1;
+        activeAudio = audio;
+        const playback = audio.play();
+        if (playback && typeof playback.catch === 'function') {
+          playback.catch(() => {
+            // Browsers may block playback until the visitor interacts with the page.
+          });
+        }
+        audio.addEventListener('ended', () => {
+          if (activeAudio === audio) activeAudio = null;
+        }, { once: true });
+      }
+
+      covers.forEach(({ element, sound }) => {
+        if (!element) return;
+        element.addEventListener('pointerenter', (event) => {
+          if (event.pointerType === 'mouse') playCoverSound(sound);
+        });
+        element.addEventListener('focusin', () => playCoverSound(sound));
+      });
+    })();
+
     // Monster character sounds: only currently uploaded sound files are enabled.
     (function () {
       const cards = document.querySelectorAll('.monster-card[data-sound]');
