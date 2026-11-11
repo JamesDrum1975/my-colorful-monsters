@@ -894,7 +894,7 @@
         }
         const audio = new Audio(sound);
         audio.preload = 'auto';
-        audio.volume = 1;
+        audio.volume = 0.8;
         activeAudio = audio;
         const playback = audio.play();
         if (playback && typeof playback.catch === 'function') {
