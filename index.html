@@ -878,7 +878,7 @@
       });
     })();
 
-    // Book-cover reveal sounds: play the matching effect when a visitor hovers a cover.
+    // Book-cover reveal sounds: hover playback with a browser-gesture fallback.
     (function () {
       const base = 'https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/';
       const covers = [
@@ -886,6 +886,8 @@
         { element: document.querySelector('.winter-book-image'), sound: base + 'christmas-reveal.wav' }
       ];
       let activeAudio = null;
+      let pendingSound = null;
+      let audioUnlocked = false;
 
       function playCoverSound(sound) {
         if (activeAudio) {
@@ -898,8 +900,8 @@
         activeAudio = audio;
         const playback = audio.play();
         if (playback && typeof playback.catch === 'function') {
-          playback.catch((error) => {
-            console.warn('Book-cover sound could not play:', error);
+          playback.catch(() => {
+            pendingSound = sound;
           });
         }
         audio.addEventListener('ended', () => {
@@ -907,9 +909,21 @@
         }, { once: true });
       }
 
+      // Some browsers block hover-initiated audio until the visitor interacts with the page.
+      document.addEventListener('pointerdown', () => {
+        audioUnlocked = true;
+        if (pendingSound) {
+          const sound = pendingSound;
+          pendingSound = null;
+          playCoverSound(sound);
+        }
+      }, { once: true, capture: true });
+
       covers.forEach(({ element, sound }) => {
         if (!element) return;
         element.addEventListener('mouseenter', () => playCoverSound(sound));
+        element.addEventListener('pointerenter', () => playCoverSound(sound));
+        element.addEventListener('click', () => playCoverSound(sound));
         element.addEventListener('focusin', () => playCoverSound(sound));
       });
     })();
