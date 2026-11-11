@@ -878,7 +878,7 @@
       });
     })();
 
-    // Book-cover hover sounds: each cover plays its own short reveal effect.
+    // Book-cover reveal sounds: play the matching effect when a visitor hovers a cover.
     (function () {
       const base = 'https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/';
       const covers = [
@@ -893,13 +893,13 @@
           activeAudio.currentTime = 0;
         }
         const audio = new Audio(sound);
-        audio.preload = 'none';
+        audio.preload = 'auto';
         audio.volume = 1;
         activeAudio = audio;
         const playback = audio.play();
         if (playback && typeof playback.catch === 'function') {
-          playback.catch(() => {
-            // Browsers may block playback until the visitor interacts with the page.
+          playback.catch((error) => {
+            console.warn('Book-cover sound could not play:', error);
           });
         }
         audio.addEventListener('ended', () => {
@@ -909,9 +909,7 @@
 
       covers.forEach(({ element, sound }) => {
         if (!element) return;
-        element.addEventListener('pointerenter', (event) => {
-          if (event.pointerType === 'mouse') playCoverSound(sound);
-        });
+        element.addEventListener('mouseenter', () => playCoverSound(sound));
         element.addEventListener('focusin', () => playCoverSound(sound));
       });
     })();
