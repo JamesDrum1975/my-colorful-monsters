@@ -878,28 +878,23 @@
       });
     })();
 
-    // Book-cover reveal sounds: one event per hover to avoid restarting the clip.
+    // Book-cover reveal sounds: restart cleanly on each hover or keyboard focus.
     (function () {
       const base = 'https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/';
       const covers = [
         { element: document.getElementById('book-cover-easter-egg'), sound: base + 'spooky-halloween.wav' },
         { element: document.querySelector('.winter-book-image'), sound: base + 'christmas-reveal.wav' }
       ];
-      const players = covers.map(({ sound }) => {
-        const audio = new Audio(sound);
-        audio.preload = 'auto';
-        audio.volume = 0.3;
-        return audio;
-      });
       let activeAudio = null;
 
-      function playCoverSound(audio) {
-        if (activeAudio && activeAudio !== audio) {
+      function playCoverSound(sound) {
+        if (activeAudio) {
           activeAudio.pause();
           activeAudio.currentTime = 0;
         }
-        audio.pause();
-        audio.currentTime = 0;
+        const audio = new Audio(sound);
+        audio.preload = 'auto';
+        audio.volume = 0.3;
         activeAudio = audio;
         const playback = audio.play();
         if (playback && typeof playback.catch === 'function') {
@@ -912,12 +907,10 @@
         }, { once: true });
       }
 
-      covers.forEach(({ element }, index) => {
+      covers.forEach(({ element, sound }) => {
         if (!element) return;
-        const audio = players[index];
-        element.addEventListener('pointerenter', () => playCoverSound(audio));
-        element.addEventListener('click', () => playCoverSound(audio));
-        element.addEventListener('focusin', () => playCoverSound(audio));
+        element.addEventListener('pointerenter', () => playCoverSound(sound));
+        element.addEventListener('focusin', () => playCoverSound(sound));
       });
     })();
 
@@ -928,7 +921,7 @@
       let activeCard = null;
 
       function playMonsterSound(card) {
-        if (activeCard === card && activeAudio && !activeAudio.paused) return;
+        if (activeCard === card && activeAudio && !activeAudio.paused && !activeAudio.ended) return;
         if (activeAudio) {
           activeAudio.pause();
           activeAudio.currentTime = 0;
@@ -941,7 +934,7 @@
           try {
             if (audio.duration && Number.isFinite(audio.duration)) {
               // Maintain the same gentle 30% level after metadata loads.
-              audio.volume = 0.5;
+              audio.volume = 0.3;
             }
           } catch (_) {}
         }, { once: true });
