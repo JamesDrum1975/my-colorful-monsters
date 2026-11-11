@@ -888,7 +888,7 @@
       const players = covers.map(({ sound }) => {
         const audio = new Audio(sound);
         audio.preload = 'auto';
-        audio.volume = 0.5;
+        audio.volume = 0.3;
         return audio;
       });
       let activeAudio = null;
@@ -935,12 +935,12 @@
         }
         const audio = new Audio(card.dataset.sound);
         audio.preload = 'none';
-        // Keep character sound effects at a comfortable 50% volume.
-        audio.volume = 0.5;
+        // Keep character sound effects at a gentle 30% volume.
+        audio.volume = 0.3;
         audio.addEventListener('loadedmetadata', () => {
           try {
             if (audio.duration && Number.isFinite(audio.duration)) {
-              // Maintain the same 50% level after metadata loads.
+              // Maintain the same gentle 30% level after metadata loads.
               audio.volume = 0.5;
             }
           } catch (_) {}
