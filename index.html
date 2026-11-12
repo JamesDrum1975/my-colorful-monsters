@@ -320,11 +320,6 @@
       .monster-card.is-revealed .monster-card-description { opacity:1; visibility:visible; }
     }
     .monster-gallery .section-head { margin-bottom:32px; }
-    .monster-sound-control { display:flex; flex-direction:column; align-items:center; gap:9px; margin-top:20px; }
-    .monster-sound-control .button { min-width:220px; }
-    .monster-sound-control p { margin:0; color:#655574; font-size:.9rem; font-weight:700; }
-    .monster-sound-control.is-enabled .button { background:#c7f464; }
-    @media(max-width:800px) { .monster-sound-control p { max-width:290px; } }
     @media(max-width:800px) { .monster-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:15px; } .monster-card { min-height:340px; padding:12px 10px; } .monster-card-front img { height:175px; } .monster-card-description { padding:16px 12px; gap:9px; } .monster-card-description p { font-size:.88rem; } }
     @media(max-width:420px) { .monster-card { min-height:350px; padding:10px 8px; } .monster-card-front img { height:145px; } .monster-card-description { padding:13px 10px; gap:8px; } .monster-card-description p { font-size:.82rem; line-height:1.35; } }
     @media(prefers-reduced-motion:reduce) { .monster-card-front,.monster-card-description { transition:none; } }
@@ -598,10 +593,6 @@
           <span class="eyebrow">Say hello!</span>
           <h2 id="monster-gallery-title">Meet the Monster Crew</h2>
           <p>Eight kinds of friendly characters, each ready to join your next coloring adventure. Hover over a monster—or tap it on a touchscreen—to hear its sound!</p>
-          <div class="monster-sound-control">
-            <button class="button primary" id="enable-monster-sounds" type="button">Enable Monster Sounds</button>
-            <p id="monster-sound-status" role="status" aria-live="polite">Tap once to turn on the monster sounds, then hover over the characters.</p>
-          </div>
         </div>
         <div class="monster-gallery-grid">
           <article class="monster-card" data-sound="https://raw.githubusercontent.com/JamesDrum1975/my-colorful-monsters-images/main/media/little-pond-monster.mp3" tabindex="0" role="button" aria-pressed="false" aria-label="Little Pond Monster. Hover, focus, or tap to hear its sound and read its personality.">
@@ -934,62 +925,42 @@
       });
     })();
 
-    // Monster character sounds: unlock audio with one clear visitor action, then reuse one player.
+    // Monster character sounds: retain the original hover playback behavior at a gentle 30% level.
     (function () {
-      const cards = Array.from(document.querySelectorAll('.monster-card[data-sound]'));
-      const control = document.querySelector('.monster-sound-control');
-      const enableButton = document.getElementById('enable-monster-sounds');
-      const status = document.getElementById('monster-sound-status');
-      if (!cards.length || !enableButton) return;
-
-      const player = new Audio();
-      player.preload = 'none';
-      player.volume = 0.3;
-      player.setAttribute('playsinline', '');
-      let soundsEnabled = false;
+      const cards = document.querySelectorAll('.monster-card[data-sound]');
+      let activeAudio = null;
       let activeCard = null;
 
       function playMonsterSound(card) {
-        if (!soundsEnabled || !card) return;
-        if (activeCard === card && !player.paused && !player.ended) return;
-
+        if (activeCard === card && activeAudio && !activeAudio.paused && !activeAudio.ended) return;
+        if (activeAudio) {
+          activeAudio.pause();
+          activeAudio.currentTime = 0;
+        }
+        const audio = new Audio(card.dataset.sound);
+        audio.preload = 'none';
+        audio.volume = 0.3;
+        audio.addEventListener('loadedmetadata', () => {
+          audio.volume = 0.3;
+        }, { once: true });
+        audio.addEventListener('error', () => {
+          console.warn('Monster sound could not load:', card.dataset.sound, audio.error);
+        }, { once: true });
+        activeAudio = audio;
         activeCard = card;
-        player.pause();
-        player.src = card.dataset.sound;
-        player.currentTime = 0;
-        player.volume = 0.3;
-
-        const playback = player.play();
+        const playback = audio.play();
         if (playback && typeof playback.catch === 'function') {
           playback.catch((error) => {
-            console.warn('Monster sound could not play:', card.dataset.sound, error);
-            if (error && error.name === 'NotAllowedError') {
-              soundsEnabled = false;
-              if (control) control.classList.remove('is-enabled');
-              enableButton.textContent = 'Enable Monster Sounds';
-              if (status) status.textContent = 'Your browser blocked audio. Tap the button to enable sounds.';
-            }
+            console.warn('Monster sound playback was blocked or unavailable:', error);
           });
         }
+        audio.addEventListener('ended', () => {
+          if (activeAudio === audio) {
+            activeAudio = null;
+            activeCard = null;
+          }
+        }, { once: true });
       }
-
-      enableButton.addEventListener('click', () => {
-        if (soundsEnabled) return;
-        soundsEnabled = true;
-        if (control) control.classList.add('is-enabled');
-        enableButton.textContent = 'Monster Sounds Enabled ✓';
-        if (status) status.textContent = 'You’re all set! Hover over any monster to hear its sound.';
-        // Play the first character's sound during this click so the browser grants audio permission.
-        playMonsterSound(cards[0]);
-      });
-
-      player.addEventListener('ended', () => {
-        activeCard = null;
-      });
-      player.addEventListener('error', () => {
-        console.warn('Monster sound could not load:', player.currentSrc, player.error);
-        activeCard = null;
-      });
 
       cards.forEach((card) => {
         const description = card.querySelector('.monster-card-description');
@@ -1021,7 +992,6 @@
         });
       });
     })();
-
     // Force coloring-page downloads even though the images are hosted in a separate repository.
     document.querySelectorAll('.preview-download').forEach((link) => {
       link.addEventListener('click', async (event) => {
